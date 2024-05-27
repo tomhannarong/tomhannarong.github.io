@@ -1,14 +1,11 @@
 import QRCodeScanner from './components/QRCodeScanner';
-import QRScanner from './components/QRScanner';
+import Camera from './components/Camera';
 
 function App() {
   return (
     <div >
-      <QRCodeScanner />
-      {/* <QRScanner /> */}
-
-      {/* <p>Lib: `https://www.npmjs.com/package/react-webcam`</p>
-      <p>Lib: `https://www.npmjs.com/package/jsqr`</p> */}
+      {/* <QRCodeScanner /> */}
+      <Camera />
     </div>
   );
 }

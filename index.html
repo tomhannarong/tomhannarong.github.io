@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tomhannarong — Projects</title>
+  <meta name="description" content="All projects by tomhannarong on GitHub" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #21262d;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #1f6feb;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --red: #f85149;
+      --yellow: #e3b341;
+      --pink: #f778ba;
+      --teal: #39d353;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+    }
+    .header-info { flex: 1; }
+    .header-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .header-name:hover { color: var(--accent); }
+    .header-sub {
+      font-size: 12px;
+      color: var(--text2);
+    }
+    .header-links {
+      display: flex;
+      gap: 12px;
+    }
+    .header-links a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-links a:hover {
+      color: var(--text);
+      background: var(--bg3);
+      border-color: var(--accent);
+    }
+
+    /* ─── Main ─── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* ─── Stats bar ─── */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 130px;
+      flex: 1;
+    }
+    .stat-icon { font-size: 20px; }
+    .stat-num {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Filter bar ─── */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-label {
+      color: var(--text2);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .filter-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text2);
+      cursor: pointer;
+      transition: all 0.15s;
+      background: transparent;
+      user-select: none;
+    }
+    .tag:hover, .tag.active {
+      background: var(--accent2);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .search-box {
+      margin-left: auto;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      width: 200px;
+      transition: border-color 0.15s;
+    }
+    .search-box::placeholder { color: var(--text2); }
+    .search-box:focus { border-color: var(--accent); }
+
+    /* ─── Section title ─── */
+    .section-title {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── Grid ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    /* ─── Card ─── */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--purple));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 166, 255, 0.08);
+    }
+    .card:hover::before { opacity: 1; }
+    .card.hidden { display: none; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      line-height: 1.3;
+    }
+    .card-title:hover { text-decoration: underline; }
+
+    .card-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-pages { background: #1f4a1f; color: var(--green); border: 1px solid #3fb95033; }
+    .badge-featured { background: #3b2f00; color: var(--yellow); border: 1px solid #e3b34133; }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .lang-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .lang-label {
+      font-size: 12px;
+      color: var(--text2);
+    }
+    .card-date {
+      font-size: 11px;
+      color: var(--text2);
+      margin-left: auto;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--accent2);
+      color: #fff;
+      border-color: var(--accent2);
+    }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text2);
+    }
+    .btn-outline:hover { color: var(--text); background: var(--bg3); border-color: var(--text2); }
+
+    /* ─── Lang colors ─── */
+    .lang-typescript { background: #3178c6; }
+    .lang-javascript { background: #f1e05a; }
+    .lang-go         { background: #00add8; }
+    .lang-html       { background: #e34c26; }
+    .lang-php        { background: #777bb4; }
+    .lang-blade      { background: #f05340; }
+    .lang-dockerfile { background: #2496ed; }
+    .lang-other      { background: #8b949e; }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text2);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── No results ─── */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text2);
+      font-size: 15px;
+    }
+    .no-results.show { display: block; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      main { padding: 20px 16px; }
+      .stats-bar { gap: 10px; }
+      .stat-card { min-width: 100px; }
+      .search-box { width: 100%; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/77085747?v=4" alt="tomhannarong" />
+    <div class="header-info">
+      <a class="header-name" href="https://github.com/tomhannarong" target="_blank">tomhannarong</a>
+      <div class="header-sub">Full Stack Developer · TypeScript · Go · Node.js</div>
+    </div>
+    <div class="header-links">
+      <a href="https://github.com/tomhannarong" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a href="https://tomhannarong.github.io/pechaburi-trip/" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Live Demo
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <span class="stat-icon">📦</span>
+      <div>
+        <div class="stat-num" id="total-count">22</div>
+        <div class="stat-label">Repositories</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">🚀</span>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Live Pages</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">💻</span>
+      <div>
+        <div class="stat-num">7</div>
+        <div class="stat-label">Languages</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">📅</span>
+      <div>
+        <div class="stat-num">2021–2026</div>
+        <div class="stat-label">Active Since</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <div class="filter-tags">
+      <span class="tag active" data-lang="all">All</span>
+      <span class="tag" data-lang="TypeScript">TypeScript</span>
+      <span class="tag" data-lang="JavaScript">JavaScript</span>
+      <span class="tag" data-lang="Go">Go</span>
+      <span class="tag" data-lang="HTML">HTML</span>
+      <span class="tag" data-lang="Blade">PHP/Blade</span>
+      <span class="tag" data-lang="Dockerfile">Docker</span>
+    </div>
+    <input class="search-box" type="text" placeholder="🔍 Search projects..." id="search" />
+  </div>
+
+  <!-- Section title -->
+  <div class="section-title">
+    Showing <span id="showing-count">22</span> repositories
+  </div>
+
+  <!-- Grid -->
+  <div class="grid" id="grid">
+
+    <div class="card" data-lang="HTML" data-name="pechaburi-trip">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/pechaburi-trip" target="_blank">🏖️ pechaburi-trip</a>
+        <div class="card-badges">
+          <span class="badge badge-featured">⭐ Featured</span>
+          <span class="badge badge-pages">🌐 Pages</span>
+        </div>
+      </div>
+      <div class="card-desc">สรุปค่าใช้จ่ายทริปเพชรบุรี — Responsive UX/UI พร้อมรายการต้อมเลี้ยง รายละเอียดรายคน และตรวจสอบย้อนกลับได้</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-html"></span>
+        <span class="lang-label">HTML</span>
+        <span class="card-date">2026-05-08</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-primary" href="https://tomhannarong.github.io/pechaburi-trip/" target="_blank">🌐 Live Demo</a>
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/pechaburi-trip" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="authentication-service-secure-full">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/authentication-service-secure-full" target="_blank">🔐 authentication-service-secure-full</a>
+      </div>
+      <div class="card-desc">Authentication service with secure full-stack implementation — JWT, refresh tokens, and secure API endpoints.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2025-11-20</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/authentication-service-secure-full" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="one-factories-api">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/one-factories-api" target="_blank">🏭 one-factories-api</a>
+      </div>
+      <div class="card-desc">REST API for factory management system built with TypeScript and Node.js.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2025-09-07</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/one-factories-api" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="my-trpc-types">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/my-trpc-types" target="_blank">🔗 my-trpc-types</a>
+      </div>
+      <div class="card-desc">Shared tRPC type definitions for end-to-end type-safe APIs between client and server.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2025-08-01</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/my-trpc-types" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="JavaScript" data-name="tomhannarong.github.io">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/tomhannarong.github.io" target="_blank">🌐 tomhannarong.github.io</a>
+        <div class="card-badges">
+          <span class="badge badge-pages">🌐 Pages</span>
+        </div>
+      </div>
+      <div class="card-desc">Personal GitHub Pages portfolio — แสดง project list และ live demos ทั้งหมด</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-javascript"></span>
+        <span class="lang-label">JavaScript</span>
+        <span class="card-date">2024-06-11</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/tomhannarong.github.io" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="Robinhood">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/Robinhood" target="_blank">📈 Robinhood</a>
+      </div>
+      <div class="card-desc">Stock trading platform clone — REST API with TypeScript, featuring portfolio management and real-time data.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2024-02-19</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/Robinhood" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="Tri-Petch-IT-Solutions">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/Tri-Petch-IT-Solutions" target="_blank">🚗 Tri-Petch-IT-Solutions</a>
+      </div>
+      <div class="card-desc">IT solutions system for Tri Petch — backend API and management tools built with TypeScript.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2024-02-12</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/Tri-Petch-IT-Solutions" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="BeDeeExam">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/BeDeeExam" target="_blank">📝 BeDeeExam</a>
+      </div>
+      <div class="card-desc">Examination system built with TypeScript — question bank, scoring, and result reporting.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2024-02-01</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/BeDeeExam" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="next.js-13">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/next.js-13" target="_blank">▲ next.js-13</a>
+      </div>
+      <div class="card-desc">Next.js 13 starter with App Router, TypeScript, and modern React patterns.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2023-06-21</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/next.js-13" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="backoffice-remix">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/backoffice-remix" target="_blank">🎛️ backoffice-remix</a>
+      </div>
+      <div class="card-desc">Admin backoffice built with Remix — full-stack TypeScript with nested routing and server-side rendering.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2022-12-27</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/backoffice-remix" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="JavaScript" data-name="movies-backend-api-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/movies-backend-api-final" target="_blank">🎬 movies-backend-api-final</a>
+      </div>
+      <div class="card-desc">Movies REST API backend — CRUD operations, search, authentication, and database integration with JavaScript/Node.js.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-javascript"></span>
+        <span class="lang-label">JavaScript</span>
+        <span class="card-date">2021-06-04</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/movies-backend-api-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="JavaScript" data-name="movies-frontend-api-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/movies-frontend-api-final" target="_blank">🎥 movies-frontend-api-final</a>
+      </div>
+      <div class="card-desc">Movies frontend web app — React UI consuming the movies API with browse, search, and detail views.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-javascript"></span>
+        <span class="lang-label">JavaScript</span>
+        <span class="card-date">2021-06-04</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/movies-frontend-api-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="Go" data-name="ticket-api">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/ticket-api" target="_blank">🎫 ticket-api</a>
+      </div>
+      <div class="card-desc">High-performance ticket system backend built with Go — fast REST API with concurrent request handling.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-go"></span>
+        <span class="lang-label">Go</span>
+        <span class="card-date">2021-05-27</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/ticket-api" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="ticket-web">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/ticket-web" target="_blank">🎟️ ticket-web</a>
+      </div>
+      <div class="card-desc">Ticket booking web frontend — React + TypeScript UI consuming the ticket-api backend.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2021-05-27</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/ticket-web" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="Blade" data-name="book-backoffice-laravel-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/book-backoffice-laravel-final" target="_blank">📚 book-backoffice-laravel-final</a>
+      </div>
+      <div class="card-desc">Book management backoffice built with Laravel and Blade — admin CRUD, user management, and reporting.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-blade"></span>
+        <span class="lang-label">PHP / Blade</span>
+        <span class="card-date">2021-06-04</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/book-backoffice-laravel-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="Go" data-name="book-frontend-api-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/book-frontend-api-final" target="_blank">📖 book-frontend-api-final</a>
+      </div>
+      <div class="card-desc">Book store API backend written in Go — RESTful endpoints for books, categories, and order management.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-go"></span>
+        <span class="lang-label">Go</span>
+        <span class="card-date">2021-06-04</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/book-frontend-api-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="petkub-backend-api-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/petkub-backend-api-final" target="_blank">🐾 petkub-backend-api-final</a>
+      </div>
+      <div class="card-desc">Pet marketplace backend API — TypeScript/Node.js with authentication, product listing, and order flow.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2021-05-12</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/petkub-backend-api-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="JavaScript" data-name="petkub-backoffice-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/petkub-backoffice-final" target="_blank">🐶 petkub-backoffice-final</a>
+      </div>
+      <div class="card-desc">Pet marketplace admin backoffice — JavaScript dashboard for managing pets, orders, and users.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-javascript"></span>
+        <span class="lang-label">JavaScript</span>
+        <span class="card-date">2021-05-12</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/petkub-backoffice-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="TypeScript" data-name="petkub-frontend-final">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/petkub-frontend-final" target="_blank">🐱 petkub-frontend-final</a>
+      </div>
+      <div class="card-desc">Pet marketplace frontend — React + TypeScript storefront with product browsing, cart, and checkout.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-typescript"></span>
+        <span class="lang-label">TypeScript</span>
+        <span class="card-date">2021-06-04</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/petkub-frontend-final" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="Dockerfile" data-name="test-docker">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/test-docker" target="_blank">🐳 test-docker</a>
+      </div>
+      <div class="card-desc">Docker containerization setup and testing — multi-stage builds and container orchestration examples.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-dockerfile"></span>
+        <span class="lang-label">Dockerfile</span>
+        <span class="card-date">2021-05-06</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/test-docker" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="Dockerfile" data-name="auto-docker">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/auto-docker" target="_blank">⚙️ auto-docker</a>
+      </div>
+      <div class="card-desc">Automated Docker deployment scripts — CI/CD pipeline integration with Docker Compose and container management.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-dockerfile"></span>
+        <span class="lang-label">Dockerfile</span>
+        <span class="card-date">2021-04-26</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/auto-docker" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+    <div class="card" data-lang="JavaScript" data-name="petkub-frontend-tsx-example">
+      <div class="card-header">
+        <a class="card-title" href="https://github.com/tomhannarong/petkub-frontend-tsx-example" target="_blank">🐾 petkub-frontend-tsx-example</a>
+      </div>
+      <div class="card-desc">TSX example for pet marketplace frontend — React component patterns and TypeScript migration examples.</div>
+      <div class="card-footer">
+        <span class="lang-dot lang-javascript"></span>
+        <span class="lang-label">JavaScript</span>
+        <span class="card-date">2021-04-05</span>
+      </div>
+      <div class="card-links">
+        <a class="btn btn-outline" href="https://github.com/tomhannarong/petkub-frontend-tsx-example" target="_blank">📁 Repo</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="no-results" id="no-results">ไม่พบ project ที่ค้นหา 🔍</div>
+</main>
+
+<footer>
+  Built with ❤️ by <a href="https://github.com/tomhannarong" target="_blank">tomhannarong</a> ·
+  Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> ·
+  <a href="https://github.com/tomhannarong/tomhannarong.github.io" target="_blank">Source</a>
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const tags = document.querySelectorAll('.tag');
+  const searchBox = document.getElementById('search');
+  const showingCount = document.getElementById('showing-count');
+  const noResults = document.getElementById('no-results');
+
+  let activeLang = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach(card => {
+      const lang = card.dataset.lang;
+      const name = card.dataset.name.toLowerCase();
+      const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+      const title = card.querySelector('.card-title').textContent.toLowerCase();
+
+      const langMatch = activeLang === 'all' || lang === activeLang;
+      const searchMatch = !searchQuery ||
+        name.includes(searchQuery) ||
+        desc.includes(searchQuery) ||
+        title.includes(searchQuery);
+
+      if (langMatch && searchMatch) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    showingCount.textContent = visible;
+    noResults.classList.toggle('show', visible === 0);
+  }
+
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      tags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      activeLang = tag.dataset.lang;
+      applyFilters();
+    });
+  });
+
+  searchBox.addEventListener('input', e => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    applyFilters();
+  });
+</script>
+
+</body>
+</html>

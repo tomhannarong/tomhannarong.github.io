@@ -9,9 +9,149 @@
     />
     <meta name="theme-color" content="#09090b" />
     <title>tomhannarong.github.io | Project Portal</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #09090b; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; min-width: 320px; min-height: 100vh; background: #09090b; color: #f4f4f5; }
+      a { color: inherit; text-decoration: none; }
+      .shell { min-height: 100vh; overflow: hidden; position: relative; }
+      .bg { position: fixed; inset: 0; pointer-events: none; background: linear-gradient(120deg, rgba(34,211,238,.16), transparent 28%, rgba(16,185,129,.1) 58%, transparent 78%), linear-gradient(180deg, rgba(39,39,42,.35), transparent 42%), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: auto, auto, 72px 72px, 72px 72px; }
+      .wrap { position: relative; width: min(100%, 1280px); margin: 0 auto; padding: 24px 20px 56px; }
+      .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .brand { display: flex; align-items: center; gap: 12px; }
+      .mark { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; border: 1px solid rgba(103,232,249,.3); background: rgba(103,232,249,.1); color: #a5f3fc; }
+      .brand strong { display: block; font-size: 14px; }
+      .brand span { display: block; margin-top: 2px; color: #a1a1aa; font-size: 12px; }
+      .ghost { height: 40px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid #3f3f46; background: rgba(24,24,27,.75); border-radius: 8px; padding: 0 14px; font-size: 14px; font-weight: 650; }
+      .hero { min-height: 70vh; display: grid; align-items: center; gap: 40px; grid-template-columns: 1.05fr .95fr; }
+      .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(110,231,183,.3); background: rgba(110,231,183,.1); color: #d1fae5; border-radius: 8px; padding: 9px 12px; font-size: 14px; font-weight: 650; }
+      h1 { margin: 24px 0 0; max-width: 860px; font-size: clamp(48px, 7vw, 86px); line-height: 1.02; letter-spacing: 0; }
+      .lead { max-width: 690px; margin: 24px 0 0; color: #d4d4d8; font-size: 18px; line-height: 1.8; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+      .primary, .secondary { height: 48px; display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; padding: 0 20px; font-size: 14px; font-weight: 750; }
+      .primary { background: #67e8f9; color: #09090b; }
+      .secondary { border: 1px solid #3f3f46; background: rgba(24,24,27,.75); }
+      .stats { display: grid; gap: 12px; }
+      .stat { border: 1px solid #27272a; background: rgba(24,24,27,.78); border-radius: 8px; padding: 20px; box-shadow: 0 24px 70px rgba(0,0,0,.22); }
+      .stat span { color: #a1a1aa; font-size: 14px; }
+      .stat strong { display: block; margin-top: 8px; font-size: 34px; }
+      .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin: 12px 0 20px; }
+      .eyebrow { color: #a7f3d0; text-transform: uppercase; letter-spacing: .18em; font-size: 13px; font-weight: 800; }
+      h2 { margin: 8px 0 0; font-size: 34px; }
+      .muted { color: #a1a1aa; font-size: 14px; }
+      .destinations, .grid { display: grid; gap: 16px; }
+      .destinations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card { min-height: 238px; display: flex; flex-direction: column; border: 1px solid #27272a; background: rgba(24,24,27,.82); border-radius: 8px; padding: 20px; }
+      .card:hover { border-color: rgba(103,232,249,.75); transform: translateY(-2px); transition: .18s ease; }
+      .badge { align-self: flex-start; display: inline-flex; height: 28px; align-items: center; border-radius: 6px; background: rgba(110,231,183,.14); color: #d1fae5; padding: 0 10px; font-size: 12px; font-weight: 800; }
+      .card h3 { margin: 18px 0 0; font-size: 24px; }
+      .card p { flex: 1; margin: 12px 0 0; color: #a1a1aa; line-height: 1.7; font-size: 14px; }
+      .card .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+      .open, .source { height: 40px; display: inline-flex; align-items: center; border-radius: 8px; padding: 0 13px; font-size: 14px; font-weight: 800; }
+      .open { background: #fafafa; color: #09090b; }
+      .source { border: 1px solid #3f3f46; color: #e4e4e7; }
+      .tools { display: grid; grid-template-columns: 1fr 160px; gap: 12px; width: min(520px, 100%); }
+      input, select { height: 44px; border: 1px solid #3f3f46; border-radius: 8px; background: rgba(24,24,27,.82); color: #fff; padding: 0 12px; outline: none; }
+      input:focus, select:focus { border-color: #67e8f9; }
+      .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; }
+      button { height: 40px; border: 1px solid #3f3f46; border-radius: 8px; background: rgba(24,24,27,.75); color: #d4d4d8; padding: 0 16px; font-weight: 750; cursor: pointer; }
+      button.active { background: #67e8f9; color: #09090b; border-color: #67e8f9; }
+      .repo .meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; color: #a1a1aa; font-size: 12px; }
+      .dot { width: 10px; height: 10px; border-radius: 99px; display: inline-block; margin-right: 7px; background: #a1a1aa; }
+      .empty { display: none; min-height: 220px; place-items: center; border: 1px solid #27272a; background: rgba(24,24,27,.8); border-radius: 8px; color: #a1a1aa; }
+      .empty.show { display: grid; }
+      @media (max-width: 920px) { .hero, .destinations, .grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(3,1fr); } }
+      @media (max-width: 640px) { .wrap { padding-inline: 16px; } .top, .section-head { align-items: flex-start; flex-direction: column; } .stats, .tools { grid-template-columns: 1fr; } h1 { font-size: 46px; } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="shell">
+        <div class="bg"></div>
+        <div class="wrap">
+          <header class="top">
+            <a class="brand" href="https://tomhannarong.github.io/" aria-label="Open home portal">
+              <span class="mark">◇</span>
+              <span><strong>tomhannarong.github.io</strong><span>Project portal</span></span>
+            </a>
+            <a class="ghost" href="https://github.com/tomhannarong">GitHub</a>
+          </header>
+
+          <section class="hero">
+            <div>
+              <span class="pill">Gateway to live projects, demos, and source code</span>
+              <h1>One clean doorway into every project.</h1>
+              <p class="lead">This portal is the front door for live pages like Pechaburi Trip, future profile pages, experiments, services, and public repositories by tomhannarong.</p>
+              <div class="actions">
+                <a class="primary" href="https://tomhannarong.github.io/pechaburi-trip/">Open Pechaburi Trip →</a>
+                <a class="secondary" href="#projects">Browse Projects</a>
+              </div>
+            </div>
+            <div class="stats">
+              <div class="stat"><span>Public repos</span><strong id="repoCount">22</strong></div>
+              <div class="stat"><span>Live routes</span><strong>2+</strong></div>
+              <div class="stat"><span>Languages</span><strong id="languageCount">6</strong></div>
+            </div>
+          </section>
+
+          <section>
+            <div class="section-head">
+              <div><div class="eyebrow">Featured</div><h2>Destinations</h2></div>
+              <span class="muted">Live links first, source always nearby</span>
+            </div>
+            <div class="destinations">
+              <article class="card"><span class="badge">Live</span><h3>Pechaburi Trip</h3><p>A live travel project and the first destination launched from this portal.</p><div class="links"><a class="open" href="https://tomhannarong.github.io/pechaburi-trip/">Open ↗</a><a class="source" href="https://github.com/tomhannarong/pechaburi-trip">Source</a></div></article>
+              <article class="card"><span class="badge">Profile</span><h3>My Profile</h3><p>A future personal profile space for experience, focus areas, and links.</p><div class="links"><a class="open" href="https://github.com/tomhannarong">Open ↗</a><a class="source" href="https://github.com/tomhannarong">Source</a></div></article>
+              <article class="card"><span class="badge">Repo</span><h3>GitHub Projects</h3><p>Browse source repositories, experiments, services, and public work.</p><div class="links"><a class="open" href="https://github.com/tomhannarong">Open ↗</a><a class="source" href="https://github.com/tomhannarong">Source</a></div></article>
+            </div>
+          </section>
+
+          <section id="projects" style="margin-top: 56px;">
+            <div class="section-head">
+              <div><div class="eyebrow">All projects</div><h2>Public GitHub work</h2></div>
+              <div class="tools"><input id="search" placeholder="Search projects" /><select id="sort"><option value="updated">Recently updated</option><option value="stars">Most starred</option><option value="name">Name</option></select></div>
+            </div>
+            <div class="filters" id="filters"><button class="active" data-kind="All">All</button><button data-kind="Featured">Featured</button><button data-kind="Website">Website</button><button data-kind="Tool">Tool</button><button data-kind="Code">Code</button><button data-kind="Archive">Archive</button></div>
+            <div class="grid" id="repoGrid"></div>
+            <div class="empty" id="empty">No projects match this view.</div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script>
+      const USERNAME = 'tomhannarong';
+      const SITE = 'https://tomhannarong.github.io';
+      const manualLiveRoutes = { 'tomhannarong.github.io': SITE, 'pechaburi-trip': SITE + '/pechaburi-trip/' };
+      const featured = new Set(Object.keys(manualLiveRoutes));
+      const colors = { HTML: '#fb923c', CSS: '#38bdf8', JavaScript: '#fcd34d', TypeScript: '#67e8f9', Dockerfile: '#60a5fa', Python: '#6ee7b7', Go: '#22d3ee', Blade: '#f87171' };
+      let repos = [];
+      let kind = 'All';
+      let query = '';
+      let sortBy = 'updated';
+      function liveUrl(repo) { return repo.homepage || manualLiveRoutes[repo.name] || (repo.has_pages ? SITE + '/' + repo.name + '/' : ''); }
+      function repoKind(repo) { if (repo.archived) return 'Archive'; if (repo.name === 'tomhannarong.github.io' || repo.name === 'pechaburi-trip' || liveUrl(repo)) return 'Website'; if (/api|service|docker|auth|bot|tool/i.test(repo.name)) return 'Tool'; return 'Code'; }
+      function date(value) { return new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(value)); }
+      function render() {
+        const q = query.trim().toLowerCase();
+        const filtered = repos.filter((repo) => {
+          const k = repoKind(repo);
+          const matchKind = kind === 'All' || kind === k || (kind === 'Featured' && featured.has(repo.name));
+          const matchQuery = !q || repo.name.toLowerCase().includes(q) || (repo.description || '').toLowerCase().includes(q) || (repo.language || '').toLowerCase().includes(q);
+          return matchKind && matchQuery;
+        }).sort((a,b) => sortBy === 'stars' ? b.stargazers_count - a.stargazers_count : sortBy === 'name' ? a.name.localeCompare(b.name) : new Date(b.updated_at) - new Date(a.updated_at));
+        document.getElementById('empty').classList.toggle('show', filtered.length === 0);
+        document.getElementById('repoGrid').innerHTML = filtered.map((repo) => {
+          const live = liveUrl(repo); const k = repoKind(repo); const color = colors[repo.language] || '#a1a1aa';
+          return `<article class="card repo"><span class="badge">${live ? 'Live' : k}</span><h3>${repo.name}</h3><p>${repo.description || 'Public project ready to explore from the source repository.'}</p><div class="meta"><span><i class="dot" style="background:${color}"></i>${repo.language || 'Code'}</span><span>★ ${repo.stargazers_count}</span><span>Updated ${date(repo.updated_at)}</span></div><div class="links">${live ? `<a class="primary" href="${live}">Open Project ↗</a>` : ''}<a class="source" href="${repo.html_url}">View Source</a></div></article>`;
+        }).join('');
+      }
+      document.getElementById('search').addEventListener('input', (event) => { query = event.target.value; render(); });
+      document.getElementById('sort').addEventListener('change', (event) => { sortBy = event.target.value; render(); });
+      document.getElementById('filters').addEventListener('click', (event) => { if (!event.target.matches('button')) return; document.querySelectorAll('#filters button').forEach((button) => button.classList.remove('active')); event.target.classList.add('active'); kind = event.target.dataset.kind; render(); });
+      fetch('https://api.github.com/users/tomhannarong/repos?per_page=100&sort=updated').then((response) => response.json()).then((data) => { repos = Array.isArray(data) ? data : []; document.getElementById('repoCount').textContent = repos.length || '22'; document.getElementById('languageCount').textContent = new Set(repos.map((repo) => repo.language).filter(Boolean)).size || '6'; render(); }).catch(() => { repos = [{ name: 'pechaburi-trip', html_url: 'https://github.com/tomhannarong/pechaburi-trip', description: 'A live travel project and the first destination launched from this portal.', language: 'HTML', stargazers_count: 1, updated_at: '2026-05-08', has_pages: true }]; render(); });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
